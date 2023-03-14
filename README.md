@@ -1,4 +1,6 @@
-# todo
+# Todo
+
+Projeto TODO em vuejs.
 
 ## Project setup
 ```

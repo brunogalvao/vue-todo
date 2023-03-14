@@ -12,7 +12,7 @@
               <div class="grid grid-cols-1 gap-4">
                 <div>
                   <input
-                    class="border-2 outline-none py-2 px-2 shadow-md font-medium w-full rounded border-blue-300 hover:border-blue-600 focus:border-blue-600 focus:shadow-blue-200"
+                    class="border-2 rounded-lg outline-none py-2 px-2 shadow-md font-medium w-full border-blue-300 hover:border-blue-600 focus:border-blue-600 focus:shadow-blue-200"
                     v-model="newTodo"
                   />
                 </div>
@@ -20,18 +20,18 @@
                   <div class="grid grid-cols-2 gap-2">
                     <div>
                       <button
-                        class="text-white py-2 px-4 shadow-md w-full rounded bg-red-400 hover:bg-red-600 font-semibold"
+                        class="text-white py-2 px-4 shadow-md w-full rounded-lg bg-red-400 hover:bg-red-600 font-semibold"
                         v-if="todos.length !== 0"
                         @click="removeAllTodos"
                       >
-                        Remove All Todos
+                        Remover todas as Tarefas
                       </button>
                     </div>
                     <div>
                       <button
-                        class="text-white py-2 px-4 shadow-md w-full rounded bg-blue-400 hover:bg-blue-600 font-semibold"
+                        class="text-white py-2 px-4 shadow-md w-full rounded-lg bg-blue-400 hover:bg-blue-600 font-semibold"
                       >
-                        Add Todo
+                        Adicionar Tarefas
                       </button>
                     </div>
                   </div>
@@ -43,21 +43,24 @@
             <div class="grid grid-cols-1 gap-3">
               <div>
                 <div class="h-full" v-if="todos.length === 0">
-                  <p class="text-gray-400">
-                    It appears you didn't added any To-Do.
-                  </p>
+                  <p class="text-gray-400">Cadastre suas tarefas.</p>
                 </div>
               </div>
               <div
-                class="rounded shadow-md p-3 h-full hover:shadow-gray-400 text-gray-600 text-lg font-semibold"
-                :class="{ completed: todo.complete }"
+                class="rounded-lg shadow-md p-3 h-full w-full text-gray-600 text-lg font-semibold cursor-pointer"
+                :class="
+                  todo.complete == true
+                    ? 'bg-orange-300 hover:bg-orange-400'
+                    : 'bg-teal-500 line-through hover:bg-teal-600'
+                "
                 v-for="(todo, index) in todos"
                 :key="index"
                 @click="completedTodo(todo)"
               >
-                <span class="text-gray-600 text-lg font-semibold">{{
-                  todo.text
-                }}</span>
+                <span
+                  class="text-gray-600 text-lg font-semibold grid justify-items-center"
+                  >{{ todo.text }}</span
+                >
               </div>
             </div>
           </div>
@@ -98,5 +101,6 @@ function updateStorage() {
 <style>
 .completed {
   text-decoration: line-through;
+  @apply bg-teal-500;
 }
 </style>
